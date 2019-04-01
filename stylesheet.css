@@ -1,17 +1,43 @@
-/*
-colors:
-dark header: #322a30
-ideabox purple: #afa5cd
-search bar/border grey: #acaab6
-save button purple/grey also text: #5e5c6a
-tiny button grey: #d4d2d8
-quality:swill text: #6a686b
-
-*/
-
-header {
-  min-height:70px;
-  padding-top:10px;
-  background-color:#322a30;
-  color:white;
+body{
+  font-family: 'Open Sans';
 }
+
+.container {
+  display: grid;
+  height: 100%;
+  grid-template-columns: repeat (3, 1fr);
+  grid-template-areas: 
+  "aside main main"
+  "aside section section";
+  grid-template-rows: repeat (3, 1fr);
+}
+
+aside {
+  background-color: #1F1F3D;
+  grid-area: aside;
+  display: flex;
+  }
+
+main {
+  background-color: #A9AAD2;
+  grid-area: main;
+}
+
+section {
+  background-color: #EAEAF4;
+  grid-area: section;
+}
+
+h1 {
+  color: white;
+  font-size: 20px;
+  font-weight: bold; 
+}
+
+h4 {
+  color: white;
+  font-size: 12px;
+  font-weight: lighter;
+}
+
+
