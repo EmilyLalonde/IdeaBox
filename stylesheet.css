@@ -1,0 +1,17 @@
+/*
+colors:
+dark header: #322a30
+ideabox purple: #afa5cd
+search bar/border grey: #acaab6
+save button purple/grey also text: #5e5c6a
+tiny button grey: #d4d2d8
+quality:swill text: #6a686b
+
+*/
+
+header {
+  min-height:70px;
+  padding-top:10px;
+  background-color:#322a30;
+  color:white;
+}
