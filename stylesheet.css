@@ -25,6 +25,7 @@ aside {
 
 main {
   background-color: #A9AAD2;
+  display: flex;
   grid-area: main;
   height: 40vh;
   display: flex;
