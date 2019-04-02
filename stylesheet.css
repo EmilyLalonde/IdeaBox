@@ -1,37 +1,59 @@
 body{
   font-family: 'Open Sans';
+  margin: 0;
 }
 
 .container {
   display: grid;
-  height: 100%;
-  grid-template-columns: repeat (3, 1fr);
+  height: 100vh;
   grid-template-areas: 
   "aside main main"
   "aside section section";
-  grid-template-rows: repeat (3, 1fr);
+  grid-template-columns: 20% 80%;
+  width: 100vw;
 }
 
 aside {
   background-color: #1F1F3D;
-  grid-area: aside;
   display: flex;
+  grid-area: aside;
+  }
+
+  nav {
+    width: 100%;
   }
 
 main {
   background-color: #A9AAD2;
   grid-area: main;
+  height: 40vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 section {
   background-color: #EAEAF4;
   grid-area: section;
+  height: 60vh;
 }
 
 h1 {
   color: white;
   font-size: 20px;
-  font-weight: bold; 
+  font-weight: bold;
+  border-bottom: 1px solid #5356A4 ;
+  padding: 0px 0px 20px 10px;
+}
+
+h2 {
+  color: #1F1F3D;
+}
+
+h3 {
+  color: white;
+  font-size: 16px;
+  font-weight: 400;
 }
 
 h4 {
@@ -40,4 +62,19 @@ h4 {
   font-weight: lighter;
 }
 
+h5 {
+  color: white;
+  border-top: 1px solid #5356A4 ;
+  padding: 20px 0px 20px 10px;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+label {
+  color: white;
+}
+
+ul {
+  color: white;
+}
 
