@@ -27,8 +27,7 @@ main {
   background-color: #A9AAD2;
   display: flex;
   grid-area: main;
-  height: 40vh;
-  display: flex;
+  height: 53vh;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -37,6 +36,40 @@ main {
 .input-field label {
   color: #1F1F3D;
   font-size: 80%;
+}
+
+.button {
+  margin-top: 20px;
+  width: 400px;
+  height: 40px;
+  background-color: #1F1F3D;
+  color: white;
+}
+
+#title-input {
+  height: 40px;
+  border: 1px solid gray;
+}
+
+#body-input {
+  height: 120px;
+  border: 1px solid gray;
+}
+
+#search-input {
+  height: 40px;
+  border: 1px solid gray;
+  width: 370px;
+}
+
+#search-button {
+  height: 44px;
+  width: 40px;
+  background-color: #1F1F3D;
+}
+
+.search-btn-and-input {
+  flex-direction: row;
 }
 
 section {
@@ -83,5 +116,12 @@ label {
 
 ul {
   color: white;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  width: 400px;
 }
 
