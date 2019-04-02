@@ -28,8 +28,15 @@ main {
   display: flex;
   grid-area: main;
   height: 40vh;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.input-field label {
+  color: #1F1F3D;
+  font-size: 80%;
 }
 
 section {
@@ -51,7 +58,7 @@ h2 {
 }
 
 h3 {
-  color: white;
+  color: #BFBFDD;
   font-size: 16px;
   font-weight: 400;
 }
@@ -63,7 +70,7 @@ h4 {
 }
 
 h5 {
-  color: white;
+  color: #BFBFDD;
   border-top: 1px solid #5356A4 ;
   padding: 20px 0px 20px 10px;
   font-size: 16px;
