@@ -1,44 +1,41 @@
 class Idea {
 
-  constructor (title, idea) {
-    this.id = id;
+  constructor (title, idea, id) {
     this.title = title;
-    this.body = body;
+    this.idea = idea;
+    this.id = id;
     this.star = false;
-    this.quality = [swill, plausible, genius];
+    this.quality = ["swill", "plausible", "genius"];
     for (var i=0; i<this.quality.length; i++) {
        if (this.quality === undefined) {
       return this.quality[0]; 
+     }
     }
   }
-}
+
+
   saveToStorage() {
-//   function saveNewIdea () {
-//   var newIdea = {
-//     title: titleInput.value,
-//     idea: ideaInput.value,
+    
+  var stringifiedNewIdea = JSON.stringify(ideaArray);
+  // console.log(stringifiednewIdea)
+  localStorage.setItem('ideaArray', stringifiednewIdea)  
+  console.log(localStorage.getItem('ideaArray'))
+  
+};
+  }
+
+//   deleteFromStorage() {
+//     // localStorage.removeItem('storeMePlease');
+
 //   }
-//   var stringifiedNewIdea = JSON.stringify(newIdea);
-//   // console.log(stringifiednewIdea)
-//   localStorage.setItem('new-idea', stringifiednewIdea)
+//   updateIdea() {
+//     // localStorage.setItem('somethingComplicated', { crust: 'deep dish', type: 'veggie' });
+//   }
+//   updateQuality() {
+
+
+// // add upVoteIdea;
+// // add downVoteIdea;
+
   
-//   console.log(localStorage.getItem('new-idea'))
-  
-// };
-  }
-
-  deleteFromStorage() {
-    // localStorage.removeItem('storeMePlease');
-
-  }
-  updateIdea() {
-    // localStorage.setItem('somethingComplicated', { crust: 'deep dish', type: 'veggie' });
-  }
-  updateQuality() {
-
-
-// add upVoteIdea;
-// add downVoteIdea;
-
-  }
-}
+// }
