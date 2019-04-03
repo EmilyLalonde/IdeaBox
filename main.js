@@ -12,7 +12,6 @@ var upvoteButton = document.querySelector('#upvote-button');
 var downvoteButton = document.querySelector('#downvote-button');
 var newCard = document.querySelector('article');
 var ideaArray = [];
-var newIdea;
 
 
 function populateCard() {
@@ -33,8 +32,11 @@ function populateCard() {
 //       enableButtons()  
 }
 
-function instantiateIdea () {
+function instantiateIdea (newIdea) {
   var newIdea = new Idea (newTitle.value, newBody.value, Date.now())
+  var stringifiedNewIdea = JSON.stringify(newIdea);
+  localStorage.setItem(stringifiedNewIdea);
+  console.log(newIdea);
 };
 
 //add event listeners
