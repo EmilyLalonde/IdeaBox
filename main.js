@@ -35,7 +35,7 @@ function populateCard() {
 function instantiateIdea (newIdea) {
   var newIdea = new Idea (newTitle.value, newBody.value, Date.now())
   var stringifiedNewIdea = JSON.stringify(newIdea);
-  localStorage.setItem(stringifiedNewIdea);
+  localStorage.setItem('ideaArray', stringifiedNewIdea);
   console.log(newIdea);
 };
 
