@@ -11,7 +11,7 @@ var closeTheCard = document.querySelector('.close-the-card');
 var upvoteButton = document.querySelector('#upvote-button');
 var downvoteButton = document.querySelector('#downvote-button');
 var newCard = document.querySelector('article');
-var ideaArray = [];
+var ideaArray =  JSON.parse(localStorage.getItem('ideaArray')) || [];
 
 
 function populateCard() {
@@ -33,9 +33,11 @@ function populateCard() {
 }
 
 function instantiateIdea (newIdea) {
-  var newIdea = new Idea (newTitle.value, newBody.value, Date.now())
+  var newIdea = new Idea (newTitle.value, newBody.value, Date.now());
+  ideaArray.push(newIdea);
   var stringifiedNewIdea = JSON.stringify(newIdea);
-  localStorage.setItem('ideaArray', stringifiedNewIdea);
+  newIdea.saveToStorage(ideaArray);
+  // localStorage.setItem('ideaArray', stringifiedNewIdea);
   console.log(newIdea);
 };
 
@@ -48,6 +50,9 @@ function instantiateIdea (newIdea) {
 
 //add event listeners
 submitButton.addEventListener('click', instantiateIdea);
+
+
+
 submitButton.addEventListener('click', populateCard);
 
 
