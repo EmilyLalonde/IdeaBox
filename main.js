@@ -10,13 +10,13 @@ var starButton = document.querySelector('#star-button');
 var closeTheCard = document.querySelector('.close-the-card');
 var upvoteButton = document.querySelector('#upvote-button');
 var downvoteButton = document.querySelector('#downvote-button');
-var newCard = document.querySelector('article');
+var newCard = document.querySelector('.idea-field');
 var ideaArray =  JSON.parse(localStorage.getItem('ideaArray')) || [];
 
 
 function populateCard() {
   newCard.innerHTML += 
-        `<header>
+        `<article data-card="card"><header>
         <img type="submit" id="star-button" src="images/star.svg" alt="star button" class="icon-button">
           <img src ="images/menu-close.svg" type ="submit" class="close-the-card icon-button"></img>
         </header>
@@ -26,7 +26,8 @@ function populateCard() {
           <img id="upvote-button" src="images/upvote.svg" alt="upvote icon" class="icon-button">
           <span>Quality: Swill</span>
           <img id="downvote-button" src="images/downvote.svg" alt="downvote icon" class="icon-button">
-        </footer>`
+        </footer>
+        </article>`
 //       winningCard.classList.add('border');
 //       adjustRangesUponWin()
 //       enableButtons()  
@@ -35,7 +36,7 @@ function populateCard() {
 function instantiateIdea (newIdea) {
   var newIdea = new Idea (newTitle.value, newBody.value, Date.now());
   ideaArray.push(newIdea);
-  var stringifiedNewIdea = JSON.stringify(newIdea);
+  stringifiedNewIdea = JSON.stringify(newIdea);
   newIdea.saveToStorage(ideaArray);
   // localStorage.setItem('ideaArray', stringifiedNewIdea);
   console.log(newIdea);
