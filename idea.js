@@ -14,11 +14,10 @@ class Idea {
   }
 
 
-  saveToStorage() {
-    
+  saveToStorage() { 
   var stringifiedNewIdea = JSON.stringify(ideaArray);
   // console.log(stringifiednewIdea)
-  localStorage.setItem('ideaArray', stringifiednewIdea)  
+  localStorage.setItem('ideaArray', stringifiedNewIdea)  
   console.log(localStorage.getItem('ideaArray'))
   
 };
