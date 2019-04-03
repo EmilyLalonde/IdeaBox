@@ -39,6 +39,13 @@ function instantiateIdea (newIdea) {
   console.log(newIdea);
 };
 
+
+///retrieving the ideas - should be done here, not in idea.js
+//ON PAGE RELOAD
+//1. use a for loop to go through all the ideas
+//2. getItem
+//3. populate the DOM
+
 //add event listeners
 submitButton.addEventListener('click', instantiateIdea);
 submitButton.addEventListener('click', populateCard);
