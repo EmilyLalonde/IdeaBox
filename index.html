@@ -1,14 +1,12 @@
 <!DOCTYPE html>
-<html>
-
+<html>x
 <head>
   <title>IdeaBox Triples | Welcome</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="stylesheet.css">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,800" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:100,400,800" rel="stylesheet">
 </head>
-
 <body class="container">
   <aside>
     <nav>
@@ -21,30 +19,31 @@
         <li>Plausible</li>
         <li>Genius</li>
       </ul>
+      <h5></h5>
       <form>
         <label for="New Quality">New Quality</label>
         <input type="text">
       </form>
-      <button>Add New Quality</button>
+      <button class= "quality-button">Add New Quality</button>
       <h5></h5>
     </nav>
   </aside>
-  <main class='input-field'>
+  <main class="input-field">
     <form action="">
       <label for="Title">Title</label>
       <input type="text" id="title-input">
     </form>
-    <form action="">
+    <form>
       <label for="Body">Body</label>
       <input type="text" id="body-input">
     </form>
     <button id="submit-input" class="button">Save</button>
-    <form class="search-btn-and-input" action="">
+    <form class="search-btn-and-input">
       <button id="search-button" type=submit></button>
       <input id="search-input" type="text" placeholder="Search ideas">
     </form>
   </main>
-  <section class='idea-field'>
+  <section class="idea-field">
     <!-- <article data-card="card"> -->
       <!-- <header>
         <img type="submit" id="star-button" src="images/star.svg" alt="star button" class="icon-button">
@@ -62,5 +61,4 @@
   <script src="idea.js"></script>
   <script src="main.js"></script>
 </body>
-
 </html>

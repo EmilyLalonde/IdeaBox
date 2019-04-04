@@ -1,8 +1,8 @@
 class Idea {
 
-  constructor (title, idea, id, quality = 0, star = false) {
+  constructor (title, body, id, quality = 0, star = false) {
     this.title = title;
-    this.idea = idea;
+    this.body = body;
     this.id = id;
     this.star = star;
     this.quality = quality;

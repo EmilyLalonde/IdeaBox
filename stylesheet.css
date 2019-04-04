@@ -27,7 +27,7 @@ main {
   background-color: #A9AAD2;
   display: flex;
   grid-area: main;
-  height: 40vh;
+  height: 45vh;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -41,29 +41,29 @@ main {
 .button {
   margin-top: 20px;
   width: 400px;
-  height: 40px;
+  height: 30px;
   background-color: #1F1F3D;
   color: white;
 }
 
 #title-input {
-  height: 40px;
+  height: 30px;
   border: 1px solid gray;
 }
 
 #body-input {
-  height: 120px;
+  height: 80px;
   border: 1px solid gray;
 }
 
 #search-input {
-  height: 40px;
+  height: 30px;
   border: 1px solid gray;
   width: 370px;
 }
 
 #search-button {
-  height: 44px;
+  height: 34px;
   width: 40px;
   background-color: #1F1F3D;
 }
@@ -75,7 +75,7 @@ main {
 section {
   background-color: #EAEAF4;
   grid-area: section;
-  height: 60vh;
+  height: 55vh;
 }
 
 .icon-button {
@@ -85,14 +85,14 @@ section {
 
 .idea-field {
   display: grid;
-  grid-template-columns: 33% 33% 33%;
+  grid-template-columns: 24% 24% 24% 24%;
   grid-template-rows: repeat(2, 1fr);
-  grid-gap: 20px 20px;
+  grid-gap: 15px 15px;
   padding: 30px;
 }
 
 article { 
- /* display: flex;*/
+  display: flex;
   flex-direction: column;
   background-color: white;
   border: solid 1px #1F1F3D;
@@ -119,6 +119,7 @@ article {
  footer {
   display: flex;
   justify-content: space-between;
+  align-items: end;
   background-color: #353567;
   color: #ffffff;
   height: 20px;
@@ -163,6 +164,11 @@ label {
 
 ul {
   color: white;
+  list-style-type: none;
+}
+
+li {
+  font-weight: 100;
 }
 
 form {
@@ -172,3 +178,17 @@ form {
   width: 400px;
 }
 
+.starred-button {
+  background-color: #5356A4;
+  border-color: #353567;
+  height: 30px;
+  width: 250px;
+}
+
+.quality-button {
+  background-color: #5356A4;
+  border-color: #353567;
+  height: 30px;
+  width: 250px;
+  margin: 10px;
+}
