@@ -1,8 +1,6 @@
-// var assert = require('chai').assert;
-// var Idea = require('../IdeaBox/idea.js');
-
-
 //create the global variables
+var newTitle = document.querySelector('#title-input');
+var newBody = document.querySelector('#body-input');
 var submitButton = document.querySelector("#submit-input");
 var starButton = document.querySelector('#star-button');
 var closeTheCard = document.querySelector('.close-the-card');
@@ -15,6 +13,9 @@ var qualityLevels = ["swill", "plausible", "genius"];
 //add event listeners
 submitButton.addEventListener('click', createIdea);
 window.addEventListener('load', restoreIdeas);
+window.addEventListener('load', enableSubmitButton);
+newTitle.addEventListener('keyup', enableSubmitButton);
+newBody.addEventListener('keyup', enableSubmitButton);
 
 
 function populateCard(idea) {
@@ -33,12 +34,12 @@ function populateCard(idea) {
         </article>`
 //       winningCard.classList.add('border');
 //       adjustRangesUponWin()
-//       enableButtons()  
-}
+        
+};
 
 function instantiateIdea (newIdea) {
-  var newTitle = document.querySelector('#title-input');
-  var newBody = document.querySelector('#body-input');
+  // var newTitle = document.querySelector('#title-input');
+  // var newBody = document.querySelector('#body-input');
   var newIdea = new Idea (newTitle.value, newBody.value, Date.now());
   console.log(typeof ideaArray)
   ideaArray.push(newIdea);
@@ -59,13 +60,28 @@ function restoreIdeas() {
     populateCard(restoredIdea);
     return restoredIdea;
   });
-}
+};
 
 function createIdea() {
   var idea = instantiateIdea();
   populateCard(idea);
   clearFields();
-}
+};
+
+function enableSubmitButton(){
+  // var newTitle = document.querySelector('#title-input');
+  // var newBody = document.querySelector('#body-input');
+  
+  if(newTitle.value === "" && newBody.value === ""){
+    submitButton.disabled = true;
+    submitButton.classList.add('disabled')
+
+  } else {
+    submitButton.disabled = false;
+    submitButton.classList.remove('disabled')
+
+  }
+};
 
 
 ///retrieving the ideas - should be done here, not in idea.js
