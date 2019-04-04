@@ -12,14 +12,17 @@ var qualityLevels = ["swill", "plausible", "genius"];
 
 //add event listeners
 submitButton.addEventListener('click', createIdea);
+submitButton.addEventListener('click', handleSubmitButton);
 window.addEventListener('load', restoreIdeas);
-window.addEventListener('load', enableSubmitButton);
-newTitle.addEventListener('keyup', enableSubmitButton);
-newBody.addEventListener('keyup', enableSubmitButton);
+window.addEventListener('load', handleSubmitButton);
+newTitle.addEventListener('keyup', handleSubmitButton);
+newBody.addEventListener('keyup', handleSubmitButton);
 
 
 function populateCard(idea) {
-  newCard.innerHTML += 
+  var cardPlaceholder = document.createElement("div");
+  newCard.prepend(cardPlaceholder);
+  cardPlaceholder.innerHTML = 
         `<article data-id="${idea.id}" ><header>
         <img type="submit" id="star-button" src="images/star.svg" alt="star button" class="icon-button">
           <img src ="images/menu-close.svg" type ="submit" class="close-the-card icon-button"></img>
@@ -38,8 +41,6 @@ function populateCard(idea) {
 };
 
 function instantiateIdea (newIdea) {
-  // var newTitle = document.querySelector('#title-input');
-  // var newBody = document.querySelector('#body-input');
   var newIdea = new Idea (newTitle.value, newBody.value, Date.now());
   console.log(typeof ideaArray)
   ideaArray.push(newIdea);
@@ -68,11 +69,9 @@ function createIdea() {
   clearFields();
 };
 
-function enableSubmitButton(){
-  // var newTitle = document.querySelector('#title-input');
-  // var newBody = document.querySelector('#body-input');
-  
-  if(newTitle.value === "" && newBody.value === ""){
+function handleSubmitButton(e){
+ e.preventDefault()
+  if(newTitle.value.length < 1 && newBody.value.length < 1){
     submitButton.disabled = true;
     submitButton.classList.add('disabled')
 
