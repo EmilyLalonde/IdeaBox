@@ -1,27 +1,19 @@
 class Idea {
 
-  constructor (title, idea, id) {
+  constructor (title, idea, id, quality = 0, star = false) {
     this.title = title;
     this.idea = idea;
     this.id = id;
-    this.star = false;
-    this.quality = ["swill", "plausible", "genius"];
-    for (var i=0; i<this.quality.length; i++) {
-       if (this.quality === undefined) {
-      return this.quality[0]; 
-     }
-    }
+    this.star = star;
+    this.quality = quality;
   }
 
 
   saveToStorage() { 
   var stringifiedNewIdea = JSON.stringify(ideaArray);
-  // console.log(stringifiednewIdea)
-  localStorage.setItem('ideaArray', stringifiedNewIdea)  
-  console.log(localStorage.getItem('ideaArray'))
-  
-};
+  localStorage.setItem('ideaArray', stringifiedNewIdea);
   }
+}
 
 //   deleteFromStorage() {
 //     // localStorage.removeItem('storeMePlease');
