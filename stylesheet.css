@@ -43,11 +43,14 @@ main {
   width: 400px;
   height: 30px;
   background-color: #1F1F3D;
+  border: #1F1F3D;
   color: white;
+  cursor: pointer;
 }
 
 .disabled {
-  background-color: gray;
+  background-color: #1F1F3D;
+  cursor: not-allowed;
 }
 
 #title-input {
@@ -70,6 +73,8 @@ main {
   height: 34px;
   width: 40px;
   background-color: #1F1F3D;
+  border: #1F1F3D;
+  color: white;
 }
 
 .search-btn-and-input {
