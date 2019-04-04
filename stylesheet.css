@@ -46,6 +46,10 @@ main {
   color: white;
 }
 
+.disabled {
+  background-color: gray;
+}
+
 #title-input {
   height: 30px;
   border: 1px solid gray;
