@@ -10,6 +10,8 @@ var newCard = document.querySelector('.idea-field');
 var ideaArray = JSON.parse(localStorage.getItem('ideaArray')) || [];
 var qualityLevels = ["swill", "plausible", "genius"];
 
+
+
 //add event listeners
 submitButton.addEventListener('click', createIdea);
 submitButton.addEventListener('click', handleSubmitButton);
@@ -17,6 +19,7 @@ window.addEventListener('load', restoreIdeas);
 window.addEventListener('load', handleSubmitButton);
 newTitle.addEventListener('keyup', handleSubmitButton);
 newBody.addEventListener('keyup', handleSubmitButton);
+newCard.addEventListener('click', removeCard);
 
 
 function populateCard(idea) {
@@ -81,6 +84,12 @@ function handleSubmitButton(e){
 
   }
 };
+
+function removeCard(event) {
+  if (event.target.className === "close-the-card icon-button") {
+    event.target.parentElement.parentElement.remove();
+  }
+}
 
 
 ///retrieving the ideas - should be done here, not in idea.js
