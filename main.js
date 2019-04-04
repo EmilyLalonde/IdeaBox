@@ -3,28 +3,27 @@
 
 
 //create the global variables
-var newTitle = document.querySelector('#title-input');
-var newBody = document.querySelector('#body-input');
 var submitButton = document.querySelector("#submit-input");
 var starButton = document.querySelector('#star-button');
 var closeTheCard = document.querySelector('.close-the-card');
 var upvoteButton = document.querySelector('#upvote-button');
 var downvoteButton = document.querySelector('#downvote-button');
 var newCard = document.querySelector('.idea-field');
-var ideaArray =  JSON.parse(localStorage.getItem('ideaArray')) || [];
+var ideaArray = JSON.parse(localStorage.getItem('ideaArray')) || [];
+var qualityLevels = ["swill", "plausible", "genius"];
 
 
-function populateCard() {
+function populateCard(idea) {
   newCard.innerHTML += 
-        `<article data-card="card"><header>
+        `<article data-id="${idea.id}" ><header>
         <img type="submit" id="star-button" src="images/star.svg" alt="star button" class="icon-button">
           <img src ="images/menu-close.svg" type ="submit" class="close-the-card icon-button"></img>
         </header>
-          <h2>${newTitle.value}</h2>
-          <p>${newBody.value}</p>
+          <h2>${idea.title}</h2>
+          <p>${idea.idea}</p>
         <footer>
           <img id="upvote-button" src="images/upvote.svg" alt="upvote icon" class="icon-button">
-          <span>Quality: Swill</span>
+          <span>Quality: ${qualityLevels[idea.quality]}</span>
           <img id="downvote-button" src="images/downvote.svg" alt="downvote icon" class="icon-button">
         </footer>
         </article>`
@@ -34,13 +33,28 @@ function populateCard() {
 }
 
 function instantiateIdea (newIdea) {
+  var newTitle = document.querySelector('#title-input');
+  var newBody = document.querySelector('#body-input');
   var newIdea = new Idea (newTitle.value, newBody.value, Date.now());
   ideaArray.push(newIdea);
-  stringifiedNewIdea = JSON.stringify(newIdea);
   newIdea.saveToStorage(ideaArray);
-  // localStorage.setItem('ideaArray', stringifiedNewIdea);
-  console.log(newIdea);
+  return newIdea;
 };
+
+function clearFields() {
+  var newTitle = document.querySelector('#title-input');
+  var newBody = document.querySelector('#body-input');
+  newTitle.value = ""; 
+  newBody.value = "";
+} 
+
+function restoreIdeas() {
+  ideaArray = ideaArray.map(function(oldIdea) {
+    var restoredIdea = new Idea(oldIdea.title, oldIdea.idea, oldIdea.id, oldIdea.quality, oldIdea.star);
+    populateCard(restoredIdea);
+    return restoredIdea;
+  });
+}
 
 
 ///retrieving the ideas - should be done here, not in idea.js
@@ -50,12 +64,14 @@ function instantiateIdea (newIdea) {
 //3. populate the DOM
 
 //add event listeners
-submitButton.addEventListener('click', instantiateIdea);
+submitButton.addEventListener('click', createIdea);
+window.addEventListener('load', restoreIdeas);
 
-
-
-submitButton.addEventListener('click', populateCard);
-
+function createIdea() {
+  var idea = instantiateIdea();
+  populateCard(idea);
+  clearFields();
+}
 
 
 
