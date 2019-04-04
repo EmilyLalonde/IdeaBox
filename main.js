@@ -24,15 +24,15 @@ function populateCard(idea) {
   newCard.prepend(cardPlaceholder);
   cardPlaceholder.innerHTML = 
         `<article data-id="${idea.id}" ><header>
-        <img type="submit" id="star-button" src="images/star.svg" alt="star button" class="icon-button">
-          <img src ="images/menu-close.svg" type ="submit" class="close-the-card icon-button"></img>
+        <input type="image" id="star-button" class="icon-button" src="images/star.svg" alt="star button">
+          <input type ="image" class="close-the-card icon-button" src ="images/menu-close.svg" alt="x button">
         </header>
           <h2>${idea.title}</h2>
           <p>${idea.body}</p>
         <footer>
-          <img id="upvote-button" src="images/upvote.svg" alt="upvote icon" class="icon-button">
+          <input type ="image" id="upvote-button" class="icon-button" src="images/upvote.svg" alt="upvote icon">
           <span>Quality: ${qualityLevels[idea.quality]}</span>
-          <img id="downvote-button" src="images/downvote.svg" alt="downvote icon" class="icon-button">
+          <input type ="image" id="downvote-button" class="icon-button" src="images/downvote.svg" alt="downvote icon">
         </footer>
         </article>`
 //       winningCard.classList.add('border');
