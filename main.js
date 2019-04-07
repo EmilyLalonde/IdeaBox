@@ -84,27 +84,15 @@ function handleSubmitButton(e){
 
   }
 };
+  var updatedIdea = new Idea ();
 
-function removeCard(event) {
-  if (event.target.className === "close-the-card icon-button") {
-    event.target.parentElement.parentElement.remove();
+
+function removeCard(e) {
+  if (e.target.className === "close-the-card icon-button") {
+    e.target.parentElement.parentElement.remove();
   }
+  var targetId = parseInt(e.target.parentElement.parentElement.dataset.id);
+  console.log(targetId);
+  updatedIdea.deleteFromStorage(targetId);
 }
 
-
-///retrieving the ideas - should be done here, not in idea.js
-//ON PAGE RELOAD
-//1. use a for loop to go through all the ideas
-//2. getItem
-//3. populate the DOM
-
-// closeTheCard.addEventListener('click', function(e) {
-//   if (event.target.className === 'closing-the-card') {
-//     event.target.parentNode.parentNode.remove();
-//   }
-// }); 
-// upvoteButton.addEventListener('click', upVodeIdea);
-// downvoteButton.addEventListener('click', downVoteIdea)  
-
-//functions will be defined as methods in the idea.js, inside the class
-//functions to define: saveToStorage(), upVoteIdea(), downVoteIdea();

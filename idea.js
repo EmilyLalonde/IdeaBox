@@ -13,7 +13,17 @@ class Idea {
   var stringifiedNewIdea = JSON.stringify(ideaArray);
   localStorage.setItem('ideaArray', stringifiedNewIdea);
   }
-}
+
+  
+  deleteFromStorage(targetId) {
+  var parsedItems = JSON.parse(localStorage.getItem('ideaArray'));
+  var itemIndex = parsedItems.findIndex(function(idea) {
+    return idea.id === targetId;
+  });
+
+  parsedItems.splice(itemIndex, 1);
+  localStorage.setItem('ideaArray', JSON.stringify(parsedItems));
+  }
 
 //   deleteFromStorage() {
 //     // localStorage.removeItem('storeMePlease');
@@ -29,4 +39,4 @@ class Idea {
 // // add downVoteIdea;
 
   
-// }
+}
