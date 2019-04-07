@@ -25,10 +25,19 @@ class Idea {
   localStorage.setItem('ideaArray', JSON.stringify(parsedItems));
   }
 
-//   deleteFromStorage() {
-//     // localStorage.removeItem('storeMePlease');
+  updateIdea() {
+  var parsedItems = JSON.parse(localStorage.getItem('ideaArray'));
+  var itemIndex = parsedItems.findIndex(function(idea) {
+    return idea.id === targetIdea;
+  });
+  // parsedItems.splice(itemIndex, 1, NEW IDEA)
 
-//   }
+
+
+  }
+
+
+
 //   updateIdea() {
 //     // localStorage.setItem('somethingComplicated', { crust: 'deep dish', type: 'veggie' });
 //   }
