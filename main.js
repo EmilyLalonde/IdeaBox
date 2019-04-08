@@ -9,6 +9,8 @@ var downvoteButton = document.querySelector('#downvote-button');
 var newCard = document.querySelector('.idea-field');
 var ideaArray = JSON.parse(localStorage.getItem('ideaArray')) || [];
 var qualityLevels = ["swill", "plausible", "genius"];
+var searchButton = document.querySelector('#search-button');
+var searchInput = document.querySelector('#search-input');
 
 
 
@@ -20,6 +22,8 @@ window.addEventListener('load', handleSubmitButton);
 newTitle.addEventListener('keyup', handleSubmitButton);
 newBody.addEventListener('keyup', handleSubmitButton);
 newCard.addEventListener('click', removeCard);
+searchButton.addEventListener('click', searchFilter);
+searchInput.addEventListener('keyup', searchFilter);
 
 
 function populateCard(idea) {
@@ -45,7 +49,7 @@ function populateCard(idea) {
 
 function instantiateIdea (newIdea) {
   var newIdea = new Idea (newTitle.value, newBody.value, Date.now());
-  console.log(typeof ideaArray)
+  console.log(ideaArray)
   ideaArray.push(newIdea);
   newIdea.saveToStorage(ideaArray);
   return newIdea;
@@ -95,4 +99,24 @@ function removeCard(e) {
   console.log(targetId);
   updatedIdea.deleteFromStorage(targetId);
 }
+
+function searchFilter(e) {
+  e.preventDefault();
+  removeCardFilter ()
+  var searchText = searchInput.value;
+  var textSearch = ideaArray.filter(function (idea) {
+    return idea.title.toLowerCase().includes(searchText) || idea.body.toLowerCase().includes(searchText);
+  });
+  console.log(textSearch)
+
+  textSearch.forEach(function(card) {
+    populateCard(card);
+  })
+
+}
+
+function removeCardFilter () {
+  newCard.innerHTML = '';
+}
+
 
