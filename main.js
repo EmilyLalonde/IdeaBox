@@ -23,15 +23,15 @@ newBody.addEventListener('keyup', handleSubmitButton);
 newCard.addEventListener('click', function(e) {
   if (e.target.className === "close-the-card icon-button") {
     e.target.parentElement.parentElement.remove();
-    removeCard();
+    removeCard(e);
   }
 });  
-newCard.addEventListener('mouseout', function(e){
-    if (e.target.className ==="editable-title") {
-    console.log("updating!!!!!");
-    modifyTitle(e)
-  }
-});
+// newCard.addEventListener('mouseout', function(e){
+//     if (e.target.className ==="editable-title") {
+//     console.log("updating!!!!!");
+//     modifyTitle(e)
+//   }
+// });
 
 
 function populateCard(idea) {
@@ -120,23 +120,23 @@ function removeCard(e) {
 
 
 
-function modifyTitle(e) {
-    var modifiedIdea = new Idea(newTitle.value);
-    var targetId = parseInt(e.target.parentElement.dataset.id);
-    console.log(targetId);
-    var changedIdea = e.target.textContent;
-    console.log("ChangedIdea!!", changedIdea)
-    var updatedID = ideaArray.find(function(idea) {
-    return idea.id === targetId;
-  });
-    var filteredIdeas = ideaArray.filter(function(idea){
-      return idea.id !== targetId
-    })
-    console.log("here is the filtered Ideas", filteredIdeas)
-    console.log("updatedID", updatedID)
-    modifiedIdea.updateIdea(updatedID, changedIdea, filteredIdeas);
-    console.log(modifiedIdea.updateIdea(updatedID, changedIdea))
-  }
+// function modifyTitle(e) {
+//     var modifiedIdea = new Idea(newTitle.value);
+//     var targetId = parseInt(e.target.parentElement.dataset.id);
+//     console.log(targetId);
+//     var changedIdea = e.target.textContent;
+//     console.log("ChangedIdea!!", changedIdea)
+//     var updatedID = ideaArray.find(function(idea) {
+//     return idea.id === targetId;
+//   });
+//     var filteredIdeas = ideaArray.filter(function(idea){
+//       return idea.id !== targetId
+//     })
+//     console.log("here is the filtered Ideas", filteredIdeas)
+//     console.log("updatedID", updatedID)
+//     modifiedIdea.updateIdea(updatedID, changedIdea, filteredIdeas);
+//     console.log(modifiedIdea.updateIdea(updatedID, changedIdea))
+//   }
 
 
 
@@ -146,6 +146,72 @@ function modifyTitle(e) {
 //   var targetIdea = parseInt(e.target.parentElement.parentElement.dataset.id);
 //   modifiedIdea.updateIdea(targetIdea);
 // }
+
+
+newCard.addEventListener("mouseout", function(e) {
+  if(e.target.className === "editable-title") {
+    console.log("updating")
+    updateTitle(e);
+  }
+})
+
+function updateTitle(e) {
+    var parsedItems = JSON.parse(localStorage.getItem("ideaArray"));
+    var targetParent = e.target.parentElement;
+    console.log(targetParent)
+    var targetId = JSON.parse(targetParent.dataset.id);
+    console.log(targetId);
+    for(var i=0; i < parsedItems.length; i++) {
+      if(parsedItems[i].id === targetId) {
+        var newIdea = parsedItems[i];
+        newIdea.title = e.target.textContent;
+        parsedItems.splice(i, 1, newIdea);
+        localStorage.removeItem("ideaArray");
+        localStorage.setItem("ideaArray", JSON.stringify(parsedItems));
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

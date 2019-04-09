@@ -25,18 +25,18 @@ class Idea {
   localStorage.setItem('ideaArray', JSON.stringify(parsedItems));
   }
 
-  updateIdea(targetId, changedIdea, currentLocalStorage) {
-  this.title = changedIdea;
-  targetId["title"] = this.title
-  // console.log(targetId)
-  // var newLocal.push(targetId)
-  // console.log("targetId should change to edited version", targetId)
-  // console.log("this is the title", this.title)
-  // console.log("this is the current localStorage", localStorage)
-  var oldLocal = JSON.parse(localStorage.ideaArray);
-  console.log("here is the old localStorage", oldLocal)
-  // var newLocal = oldLocal.push(targetId);
-  var newLocal = []
+  // updateIdea(targetId, changedIdea, currentLocalStorage) {
+  // this.title = changedIdea;
+  // targetId["title"] = this.title
+  // // console.log(targetId)
+  // // var newLocal.push(targetId)
+  // // console.log("targetId should change to edited version", targetId)
+  // // console.log("this is the title", this.title)
+  // // console.log("this is the current localStorage", localStorage)
+  // var oldLocal = JSON.parse(localStorage.ideaArray);
+  // console.log("here is the old localStorage", oldLocal)
+  // // var newLocal = oldLocal.push(targetId);
+  // var newLocal = []
 
 // currentLocalStorage is the objects that are NOT the card we want to change.
 // targetId is our edited object
@@ -45,10 +45,10 @@ class Idea {
 //remove the old local storage.
 
 
-  console.log(newLocal)
-  localStorage.clear()
-  localStorage.setItem('ideaArray', JSON.stringify(newLocal));
-  }
+  // console.log(newLocal)
+  // localStorage.clear()
+  // localStorage.setItem('ideaArray', JSON.stringify(newLocal));
+  // }
 
 
 
