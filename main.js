@@ -14,6 +14,7 @@ var searchInput = document.querySelector('#search-input');
 
 
 
+
 //add event listeners
 submitButton.addEventListener('click', createIdea);
 submitButton.addEventListener('click', handleSubmitButton);
@@ -34,8 +35,8 @@ function populateCard(idea) {
         <input type="image" id="star-button" class="icon-button" src="images/star.svg" alt="star button">
           <input type ="image" class="close-the-card icon-button" src ="images/menu-close.svg" alt="x button">
         </header>
-          <h2>${idea.title}</h2>
-          <p>${idea.body}</p>
+          <h2 contentEditable = "true">${idea.title}</h2>
+          <p contentEditable = "true">${idea.body}</p>
         <footer>
           <input type ="image" id="upvote-button" class="icon-button" src="images/upvote.svg" alt="upvote icon">
           <span>Quality: ${qualityLevels[idea.quality]}</span>
@@ -85,20 +86,27 @@ function handleSubmitButton(e){
   } else {
     submitButton.disabled = false;
     submitButton.classList.remove('disabled')
-
   }
 };
-  var updatedIdea = new Idea ();
 
 
 function removeCard(e) {
+  var removedIdea = new Idea ();
   if (e.target.className === "close-the-card icon-button") {
     e.target.parentElement.parentElement.remove();
   }
   var targetId = parseInt(e.target.parentElement.parentElement.dataset.id);
   console.log(targetId);
-  updatedIdea.deleteFromStorage(targetId);
+  removedIdea.deleteFromStorage(targetId);
 }
+
+function updateCard(e) {
+  var idea = instantiateIdea();
+  populateCard(idea);
+  var targetIdea = parseInt(e.target.parentElement.parentElement.dataset.id);
+  modifiedIdea.updateIdea(targetIdea);
+}
+
 
 function searchFilter(e) {
   e.preventDefault();
@@ -118,5 +126,6 @@ function searchFilter(e) {
 function removeCardFilter () {
   newCard.innerHTML = '';
 }
+
 
 
