@@ -26,6 +26,7 @@ window.addEventListener('load', restoreIdeas);
 window.addEventListener('load', handleSubmitButton);
 newTitle.addEventListener('keyup', handleSubmitButton);
 newBody.addEventListener('keyup', handleSubmitButton);
+newCard.addEventListener("focusout", updateIdeaCard)
 
 // newCard.addEventListener('click', removeCard);
 searchButton.addEventListener('click', searchFilter);
@@ -42,17 +43,6 @@ newCard.addEventListener('click', function(e) {
 });  
 
 
-  
-
-
-// newCard.addEventListener('mouseout', function(e){
-//     if (e.target.className ==="editable-title") {
-//     console.log("updating!!!!!");
-//     modifyTitle(e)
-//   }
-// });
-
-
 
 function populateCard(idea) {
   var cardPlaceholder = document.createElement("div");
@@ -63,15 +53,13 @@ function populateCard(idea) {
           <input type ="image" class="close-the-card icon-button" src ="images/menu-close.svg" alt="x button">
         </header>
           <h2 contentEditable = "true" class="editable-title">${idea.title}</h2>
-          <p contentEditable = "true">${idea.body}</p>
+          <p contentEditable = "true" class="editable-body">${idea.body}</p>
         <footer>
           <input type ="image" id="upvote-button" class="icon-button" src="images/upvote.svg" alt="upvote icon">
           <span>Quality: ${qualityLevels[idea.quality]}</span>
           <input type ="image" id="downvote-button" class="icon-button" src="images/downvote.svg" alt="downvote icon">
         </footer>
         </article>`
-//       winningCard.classList.add('border');
-//       adjustRangesUponWin()
         
 };
 
@@ -119,74 +107,24 @@ function handleSubmitButton(e){
 };
 
 
+function updateIdeaCard(e) {
 
-// function updateTitle(e) {
-//     for(var i=0; i < parsedItems.length; i++) {
-//       if(parsedItems[i].id === targetId) {
-//         var newIdea = parsedItems[i];
+  if(e.target.className.includes("editable-title" && "editable-body")) {
 
-    // var targetParent = e.target.parentElement;
-    // console.log(targetParent)
-
-    // var targetId = JSON.parseInt(targetParent.dataset.id);
-    // console.log(targetId);
-//         
-//     }
-//   }
-// }
-
-
-
-// function modifyTitle(e) {
-//     var modifiedIdea = new Idea(newTitle.value);
-//     var targetId = parseInt(e.target.parentElement.dataset.id);
-//     console.log(targetId);
-//     var changedIdea = e.target.textContent;
-//     console.log("ChangedIdea!!", changedIdea)
-//     var updatedID = ideaArray.find(function(idea) {
-//     return idea.id === targetId;
-//   });
-//     var filteredIdeas = ideaArray.filter(function(idea){
-//       return idea.id !== targetId
-//     })
-//     console.log("here is the filtered Ideas", filteredIdeas)
-//     console.log("updatedID", updatedID)
-//     modifiedIdea.updateIdea(updatedID, changedIdea, filteredIdeas);
-//     console.log(modifiedIdea.updateIdea(updatedID, changedIdea))
-//   }
-
-
-
-// function updateCard(e) {
-//   var idea = instantiateIdea();
-//   populateCard(idea);
-//   var targetIdea = parseInt(e.target.parentElement.parentElement.dataset.id);
-//   modifiedIdea.updateIdea(targetIdea);
-// }
-
-
-newCard.addEventListener("focusout", function(e) {
-
-  if(e.target.className.includes("editable-title")) {
-
-    var parsedItems = JSON.parse(localStorage.getItem("ideaArray"));
     var targetParent = e.target.parentElement;
-    var targetId = JSON.parse(targetParent.dataset.id);
+    var parsedId = JSON.parse(targetParent.dataset.id);
+    var targetId = ideaArray.find(function(idea) {
+      return idea.id === parsedId;
+    })
+        let newTitle = document.querySelector('.editable-title')
+        let newBody = document.querySelector('.editable-body')
+        let titleValue = newTitle.innerText
+        let bodyValue = newBody.innerText
 
-    for(var i=0; i < parsedItems.length; i++) {
-      if(parsedItems[i].id === targetId) {
-        var newIdea = parsedItems[i];
-        newIdea.title = e.target.textContent;
-        parsedItems.splice(i, 1, newIdea);
-        localStorage.removeItem("ideaArray");
-        localStorage.setItem("ideaArray", JSON.stringify(parsedItems));
+        targetId.updateIdea(targetId, titleValue, bodyValue);
+
     }
   }
-
-
-  }
-})
-
 
 
 function searchFilter(e) {
