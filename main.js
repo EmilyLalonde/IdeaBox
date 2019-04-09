@@ -27,16 +27,24 @@ window.addEventListener('load', handleSubmitButton);
 newTitle.addEventListener('keyup', handleSubmitButton);
 newBody.addEventListener('keyup', handleSubmitButton);
 
-newCard.addEventListener('click', removeCard);
+// newCard.addEventListener('click', removeCard);
 searchButton.addEventListener('click', searchFilter);
 searchInput.addEventListener('keyup', searchFilter);
 
 newCard.addEventListener('click', function(e) {
   if (e.target.className === "close-the-card icon-button") {
     e.target.parentElement.parentElement.remove();
-    removeCard(e);
+    var removedIdea = new Idea ();
+
+   var targetId = parseInt(e.target.parentElement.parentElement.dataset.id);
+   removedIdea.deleteFromStorage(targetId);
   }
 });  
+
+
+  
+
+
 // newCard.addEventListener('mouseout', function(e){
 //     if (e.target.className ==="editable-title") {
 //     console.log("updating!!!!!");
@@ -111,13 +119,6 @@ function handleSubmitButton(e){
 };
 
 
-function removeCard(e) {
-  var removedIdea = new Idea ();
-
-  var targetId = parseInt(e.target.parentElement.parentElement.dataset.id);
-  console.log(targetId);
-  removedIdea.deleteFromStorage(targetId);
-}
 
 // function updateTitle(e) {
 //     for(var i=0; i < parsedItems.length; i++) {
@@ -164,19 +165,14 @@ function removeCard(e) {
 // }
 
 
-newCard.addEventListener("mouseout", function(e) {
-  if(e.target.className === "editable-title") {
-    console.log("updating")
-    updateTitle(e);
-  }
-})
+newCard.addEventListener("focusout", function(e) {
 
-function updateTitle(e) {
+  if(e.target.className.includes("editable-title")) {
+
     var parsedItems = JSON.parse(localStorage.getItem("ideaArray"));
     var targetParent = e.target.parentElement;
-    console.log(targetParent)
     var targetId = JSON.parse(targetParent.dataset.id);
-    console.log(targetId);
+
     for(var i=0; i < parsedItems.length; i++) {
       if(parsedItems[i].id === targetId) {
         var newIdea = parsedItems[i];
@@ -186,7 +182,11 @@ function updateTitle(e) {
         localStorage.setItem("ideaArray", JSON.stringify(parsedItems));
     }
   }
-}
+
+
+  }
+})
+
 
 
 function searchFilter(e) {
@@ -196,7 +196,6 @@ function searchFilter(e) {
   var textSearch = ideaArray.filter(function (idea) {
     return idea.title.toLowerCase().includes(searchText) || idea.body.toLowerCase().includes(searchText);
   });
-  console.log(textSearch)
 
   textSearch.forEach(function(card) {
     populateCard(card);
