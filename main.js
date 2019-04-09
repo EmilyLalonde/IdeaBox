@@ -2,6 +2,7 @@
 var newTitle = document.querySelector('#title-input');
 var newBody = document.querySelector('#body-input');
 var submitButton = document.querySelector("#submit-input");
+var searchInput = document.querySelector('#search-input')
 var starButton = document.querySelector('#star-button');
 var closeTheCard = document.querySelector('.close-the-card');
 var upvoteButton = document.querySelector('#upvote-button');
@@ -21,6 +22,7 @@ window.addEventListener('load', handleSubmitButton);
 newTitle.addEventListener('keyup', handleSubmitButton);
 newBody.addEventListener('keyup', handleSubmitButton);
 newCard.addEventListener('click', removeCard);
+searchInput.addEventListener('keyup', searchCards);
 
 
 function populateCard(idea) {
@@ -94,14 +96,25 @@ function removeCard(e) {
   var targetId = parseInt(e.target.parentElement.parentElement.dataset.id);
   console.log(targetId);
   removedIdea.deleteFromStorage(targetId);
-}
+};
 
 function updateCard(e) {
   var idea = instantiateIdea();
   populateCard(idea);
   var targetIdea = parseInt(e.target.parentElement.parentElement.dataset.id);
   modifiedIdea.updateIdea(targetIdea);
-}
+};
+
+function searchCards(e) {
+
+  var searchCriteria = searchInput.value;
+  console.log(searchInput.value);
+  var filteredArray = ideaArray.filter(val => {
+    return val.title == searchCriteria;
+    console.log(filteredArray);
+
+  })
+};
 
 
 
