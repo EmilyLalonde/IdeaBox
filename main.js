@@ -9,8 +9,12 @@ var downvoteButton = document.querySelector('#downvote-button');
 var newCard = document.querySelector('.idea-field');
 var ideaArray = JSON.parse(localStorage.getItem('ideaArray')) || [];
 var qualityLevels = ["swill", "plausible", "genius"];
+
 var searchButton = document.querySelector('#search-button');
 var searchInput = document.querySelector('#search-input');
+
+
+// var modifiedTitle = document.querySelector('.editable-title');
 
 
 
@@ -22,9 +26,24 @@ window.addEventListener('load', restoreIdeas);
 window.addEventListener('load', handleSubmitButton);
 newTitle.addEventListener('keyup', handleSubmitButton);
 newBody.addEventListener('keyup', handleSubmitButton);
+
 newCard.addEventListener('click', removeCard);
 searchButton.addEventListener('click', searchFilter);
 searchInput.addEventListener('keyup', searchFilter);
+
+newCard.addEventListener('click', function(e) {
+  if (e.target.className === "close-the-card icon-button") {
+    e.target.parentElement.parentElement.remove();
+    removeCard(e);
+  }
+});  
+// newCard.addEventListener('mouseout', function(e){
+//     if (e.target.className ==="editable-title") {
+//     console.log("updating!!!!!");
+//     modifyTitle(e)
+//   }
+// });
+
 
 
 function populateCard(idea) {
@@ -35,7 +54,7 @@ function populateCard(idea) {
         <input type="image" id="star-button" class="icon-button" src="images/star.svg" alt="star button">
           <input type ="image" class="close-the-card icon-button" src ="images/menu-close.svg" alt="x button">
         </header>
-          <h2 contentEditable = "true">${idea.title}</h2>
+          <h2 contentEditable = "true" class="editable-title">${idea.title}</h2>
           <p contentEditable = "true">${idea.body}</p>
         <footer>
           <input type ="image" id="upvote-button" class="icon-button" src="images/upvote.svg" alt="upvote icon">
@@ -50,7 +69,10 @@ function populateCard(idea) {
 
 function instantiateIdea (newIdea) {
   var newIdea = new Idea (newTitle.value, newBody.value, Date.now());
+
   console.log(ideaArray)
+
+
   ideaArray.push(newIdea);
   newIdea.saveToStorage(ideaArray);
   return newIdea;
@@ -82,7 +104,6 @@ function handleSubmitButton(e){
   if(newTitle.value.length < 1 && newBody.value.length < 1){
     submitButton.disabled = true;
     submitButton.classList.add('disabled')
-
   } else {
     submitButton.disabled = false;
     submitButton.classList.remove('disabled')
@@ -92,19 +113,79 @@ function handleSubmitButton(e){
 
 function removeCard(e) {
   var removedIdea = new Idea ();
-  if (e.target.className === "close-the-card icon-button") {
-    e.target.parentElement.parentElement.remove();
-  }
+
   var targetId = parseInt(e.target.parentElement.parentElement.dataset.id);
   console.log(targetId);
   removedIdea.deleteFromStorage(targetId);
 }
 
-function updateCard(e) {
-  var idea = instantiateIdea();
-  populateCard(idea);
-  var targetIdea = parseInt(e.target.parentElement.parentElement.dataset.id);
-  modifiedIdea.updateIdea(targetIdea);
+// function updateTitle(e) {
+//     for(var i=0; i < parsedItems.length; i++) {
+//       if(parsedItems[i].id === targetId) {
+//         var newIdea = parsedItems[i];
+
+    // var targetParent = e.target.parentElement;
+    // console.log(targetParent)
+
+    // var targetId = JSON.parseInt(targetParent.dataset.id);
+    // console.log(targetId);
+//         
+//     }
+//   }
+// }
+
+
+
+// function modifyTitle(e) {
+//     var modifiedIdea = new Idea(newTitle.value);
+//     var targetId = parseInt(e.target.parentElement.dataset.id);
+//     console.log(targetId);
+//     var changedIdea = e.target.textContent;
+//     console.log("ChangedIdea!!", changedIdea)
+//     var updatedID = ideaArray.find(function(idea) {
+//     return idea.id === targetId;
+//   });
+//     var filteredIdeas = ideaArray.filter(function(idea){
+//       return idea.id !== targetId
+//     })
+//     console.log("here is the filtered Ideas", filteredIdeas)
+//     console.log("updatedID", updatedID)
+//     modifiedIdea.updateIdea(updatedID, changedIdea, filteredIdeas);
+//     console.log(modifiedIdea.updateIdea(updatedID, changedIdea))
+//   }
+
+
+
+// function updateCard(e) {
+//   var idea = instantiateIdea();
+//   populateCard(idea);
+//   var targetIdea = parseInt(e.target.parentElement.parentElement.dataset.id);
+//   modifiedIdea.updateIdea(targetIdea);
+// }
+
+
+newCard.addEventListener("mouseout", function(e) {
+  if(e.target.className === "editable-title") {
+    console.log("updating")
+    updateTitle(e);
+  }
+})
+
+function updateTitle(e) {
+    var parsedItems = JSON.parse(localStorage.getItem("ideaArray"));
+    var targetParent = e.target.parentElement;
+    console.log(targetParent)
+    var targetId = JSON.parse(targetParent.dataset.id);
+    console.log(targetId);
+    for(var i=0; i < parsedItems.length; i++) {
+      if(parsedItems[i].id === targetId) {
+        var newIdea = parsedItems[i];
+        newIdea.title = e.target.textContent;
+        parsedItems.splice(i, 1, newIdea);
+        localStorage.removeItem("ideaArray");
+        localStorage.setItem("ideaArray", JSON.stringify(parsedItems));
+    }
+  }
 }
 
 
@@ -126,6 +207,47 @@ function searchFilter(e) {
 function removeCardFilter () {
   newCard.innerHTML = '';
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
