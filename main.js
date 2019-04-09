@@ -21,6 +21,32 @@ window.addEventListener('load', handleSubmitButton);
 newTitle.addEventListener('keyup', handleSubmitButton);
 newBody.addEventListener('keyup', handleSubmitButton);
 newCard.addEventListener('click', removeCard);
+window.addEventListener('load', greetingMessage);
+submitButton.addEventListener('click',greetingMessage);
+newCard.addEventListener('click', greetingMessage);
+
+
+function greetingMessage(e){
+e.preventDefault();
+  var messageHolder= document.createElement("figure");
+  console.log(ideaArray.length);
+  if(ideaArray.length === 0){
+    console.log ("The array is empty") 
+    messageHolder.innerText = "Please enter an idea...";
+    newCard.append(messageHolder);
+
+
+} else {
+  console.log("There are items in the array");
+  console.log(ideaArray.length);
+  messageHolder.innerText="";
+
+}
+  
+}
+
+  
+
 
 
 function populateCard(idea) {
