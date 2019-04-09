@@ -107,8 +107,7 @@ function searchFilter(e) {
   var textSearch = ideaArray.filter(function (idea) {
     return idea.title.toLowerCase().includes(searchText) || idea.body.toLowerCase().includes(searchText);
   });
-  console.log(textSearch)
-
+//possible refactor
   textSearch.forEach(function(card) {
     populateCard(card);
   })
@@ -120,3 +119,16 @@ function removeCardFilter () {
 }
 
 
+// function filterSwill(e) {
+//   e.preventDefault();
+//   removeCards();
+//   var swill = document.querySelector('#swill-btn');
+
+//   if (swill === event.target) {
+//       var swillSearch = ideasArray.filter(function (x) {
+//        return x.quality ==="Swill"
+//       })
+//       swillSearch.forEach(function (y) {
+//         makeCard(y);
+//       })
+//   }
