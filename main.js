@@ -2,14 +2,12 @@
 var newTitle = document.querySelector('#title-input');
 var newBody = document.querySelector('#body-input');
 var submitButton = document.querySelector("#submit-input");
-
 var closeTheCard = document.querySelector('.close-the-card');
 var upvoteButton = document.querySelector('#upvote-button');
 var downvoteButton = document.querySelector('#downvote-button');
 var newCard = document.querySelector('.idea-field');
 var ideaArray = JSON.parse(localStorage.getItem('ideaArray')) || [];
 var qualityLevels = ["swill", "plausible", "genius"];
-
 var searchButton = document.querySelector('#search-button');
 var searchInput = document.querySelector('#search-input');
 
@@ -23,6 +21,7 @@ window.addEventListener('load', handleSubmitButton);
 newTitle.addEventListener('keyup', handleSubmitButton);
 newBody.addEventListener('keyup', handleSubmitButton);
 newCard.addEventListener("focusout", updateIdeaCard)
+newCard.addEventListener('click', updateStar); 
 
 // newCard.addEventListener('click', removeCard);
 searchButton.addEventListener('click', searchFilter);
@@ -144,35 +143,38 @@ function searchFilter(e) {
   textSearch.forEach(function(card) {
     populateCard(card);
   })
-
-}
+};
 
 function removeCardFilter () {
   newCard.innerHTML = '';
-}
-
-newCard.addEventListener('click', updateStar); 
+};
 
 function updateStar(event) {
   event.preventDefault();
-  console.log(event.target)
   if (event.target.matches('#star-button')){
   var targetParent = event.target.parentElement.parentElement;
   var parsedId = parseInt(targetParent.dataset.id)
   var targetId = ideaArray.find(function(idea) {
   return idea.id === parsedId;
-
 })
   targetId.starToggle();
- 
-  // console.log(targetId)
- 
-  
-  event.target.classList.toggle('.star-active');
-
- 
+  event.target.classList.toggle('.star-active'); 
 }
 };
+
+// function upvoteCard(event) {
+//   event.preventDefault();
+//   if (event.target.matches('#upvote-button')){
+//   var targetParent = event.target.parentElement.parentElement;
+//   var parsedId = parseInt(targetParent.dataset.id)
+//   var targetId = ideaArray.find(function(idea) {
+//   return idea.id === parsedId;
+// })
+//   // targetId.upVote();
+//   // event.target.classList;
+
+// }
+// };
 
 
   
