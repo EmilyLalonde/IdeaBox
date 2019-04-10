@@ -2,7 +2,7 @@
 var newTitle = document.querySelector('#title-input');
 var newBody = document.querySelector('#body-input');
 var submitButton = document.querySelector("#submit-input");
-var starButton = document.querySelector('#star-button');
+
 var closeTheCard = document.querySelector('.close-the-card');
 var upvoteButton = document.querySelector('#upvote-button');
 var downvoteButton = document.querySelector('#downvote-button');
@@ -153,8 +153,9 @@ function removeCardFilter () {
 
 newCard.addEventListener('click', updateStar); 
 
-function updateStar(idea) {
+function updateStar(event) {
   event.preventDefault();
+  console.log(event.target)
   if (event.target.matches('#star-button')){
   var targetParent = event.target.parentElement.parentElement;
   var parsedId = parseInt(targetParent.dataset.id)
@@ -163,7 +164,13 @@ function updateStar(idea) {
 
 })
   targetId.starToggle();
-  console.log(targetId)
+ 
+  // console.log(targetId)
+ 
+  
+  event.target.classList.toggle('.star-active');
+
+ 
 }
 };
 

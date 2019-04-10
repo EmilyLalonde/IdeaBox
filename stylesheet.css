@@ -53,6 +53,16 @@ main {
   cursor: not-allowed;
 }
 
+.star-active {
+  background-image: url("images/star-active.svg");
+  background-color: transparent;
+}
+
+.star-button {
+  background-image: url("images/star.svg");
+  background-color: transparent;
+}
+
 #title-input {
   height: 30px;
   border: 1px solid gray;
@@ -90,6 +100,7 @@ section {
 .icon-button {
   height: 20px;
   width: 20px;
+  background-color: transparent;
 }
 
 .idea-field {
