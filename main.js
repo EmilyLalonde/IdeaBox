@@ -13,11 +13,7 @@ var qualityLevels = ["swill", "plausible", "genius"];
 var searchButton = document.querySelector('#search-button');
 var searchInput = document.querySelector('#search-input');
 
-
 // var modifiedTitle = document.querySelector('.editable-title');
-
-
-
 
 //add event listeners
 submitButton.addEventListener('click', createIdea);
@@ -35,7 +31,7 @@ searchInput.addEventListener('keyup', searchFilter);
 newCard.addEventListener('click', function(e) {
   if (e.target.className === "close-the-card icon-button") {
     e.target.parentElement.parentElement.remove();
-    var removedIdea = new Idea ();
+    var removedIdea = new Idea();
 
    var targetId = parseInt(e.target.parentElement.parentElement.dataset.id);
    removedIdea.deleteFromStorage(targetId);
@@ -46,13 +42,8 @@ newCard.addEventListener('click', greetingMessage);
 
 
 function greetingMessage(e){
-var greeting = document.querySelector('.greeting');
-e.preventDefault();
-  // if(ideaArray.length === 0){
-  //   console.log ("The array is empty") 
-  //   messageHolder.innerText = "Please enter an idea...";
-  //   newCard.append(messageHolder);
-
+  var greeting = document.querySelector('.greeting');
+  e.preventDefault();
   if (ideaArray.length !==0) {
   console.log("There are items in the array");
   console.log(ideaArray.length);
@@ -77,7 +68,18 @@ function populateCard(idea) {
           <input type ="image" id="downvote-button" class="icon-button" src="images/downvote.svg" alt="downvote icon">
         </footer>
         </article>`
-        
+
+  document.addEventListener('click', function (event) {
+  if (!event.target.matches('#star-button')) return;
+  event.preventDefault();
+  var targetParent = event.target.parentElement;
+  var parsedId = JSON.parse(targetParent.datatset.id)
+  var targetId = ideaArray.find(function(idea) {
+  return idea.id === targetId;
+
+})
+ starToggle(idea);
+})
 };
 
 function instantiateIdea (newIdea) {

@@ -1,13 +1,14 @@
 class Idea {
 
-  constructor (title, body, id, quality = 0, star = false) {
+  constructor (title, body, id, quality = 0, star = false, starImg) {
     this.title = title;
     this.body = body;
     this.id = id;
-    this.star = star;
     this.quality = quality;
+    this.star = star;
+    this.starImg = this.starImg || "images/star.svg"
+    
   }
-
 
   saveToStorage() { 
   var stringifiedNewIdea = JSON.stringify(ideaArray);
@@ -34,7 +35,16 @@ class Idea {
   targetId.title = newTitle;
   targetId.body = newBody;
   this.saveToStorage();
+  };
+
+  starToggle(targetId) {
+  this.star = !this.star;
+  if (this.star == true) {
+    this.starImg = "images/star-active"
+  }else{
+    this.starImg = "images/star.svg"
   }
+}
 
 
 //   updateQuality() {
