@@ -2,22 +2,16 @@
 var newTitle = document.querySelector('#title-input');
 var newBody = document.querySelector('#body-input');
 var submitButton = document.querySelector("#submit-input");
-var starButton = document.querySelector('#star-button');
 var closeTheCard = document.querySelector('.close-the-card');
 var upvoteButton = document.querySelector('#upvote-button');
 var downvoteButton = document.querySelector('#downvote-button');
 var newCard = document.querySelector('.idea-field');
 var ideaArray = JSON.parse(localStorage.getItem('ideaArray')) || [];
 var qualityLevels = ["swill", "plausible", "genius"];
-
 var searchButton = document.querySelector('#search-button');
 var searchInput = document.querySelector('#search-input');
 
-
 // var modifiedTitle = document.querySelector('.editable-title');
-
-
-
 
 //add event listeners
 submitButton.addEventListener('click', createIdea);
@@ -26,6 +20,7 @@ window.addEventListener('load', restoreIdeas);
 window.addEventListener('load', handleSubmitButton);
 newTitle.addEventListener('keyup', handleSubmitButton);
 newBody.addEventListener('keyup', handleSubmitButton);
+newCard.addEventListener('click', updateStar); 
 newCard.addEventListener("input", updateIdeaCard)
 
 // newCard.addEventListener('click', removeCard);
@@ -35,7 +30,7 @@ searchInput.addEventListener('keyup', searchFilter);
 newCard.addEventListener('click', function(e) {
   if (e.target.className === "close-the-card icon-button") {
     e.target.parentElement.parentElement.remove();
-    var removedIdea = new Idea ();
+    var removedIdea = new Idea();
 
    var targetId = parseInt(e.target.parentElement.parentElement.dataset.id);
    removedIdea.deleteFromStorage(targetId);
@@ -46,17 +41,15 @@ newCard.addEventListener('click', greetingMessage);
 
 
 function greetingMessage(e){
-var greeting = document.querySelector('.greeting');
-e.preventDefault();
-  // if(ideaArray.length === 0){
-  //   console.log ("The array is empty") 
-  //   messageHolder.innerText = "Please enter an idea...";
-  //   newCard.append(messageHolder);
-
+  var greeting = document.querySelector('.greeting');
+  e.preventDefault();
   if (ideaArray.length !==0) {
   console.log("There are items in the array");
   console.log(ideaArray.length);
   greeting.setAttribute("hidden", true)
+  } else { 
+    greeting.removeAttribute("hidden", true)
+    console.log("Array is empty")
   }
  };   
 
@@ -66,7 +59,7 @@ function populateCard(idea) {
   newCard.prepend(cardPlaceholder);
   cardPlaceholder.innerHTML = 
         `<article data-id="${idea.id}" ><header>
-        <input type="image" id="star-button" class="icon-button" src="images/star.svg" alt="star button">
+        <input type="image" id="star-button" class="star-button icon-button" src="images/star.svg" alt="star button">
           <input type ="image" class="close-the-card icon-button" src ="images/menu-close.svg" alt="x button">
         </header>
           <h2 contentEditable = "true" class="editable-title">${idea.title}</h2>
@@ -77,7 +70,6 @@ function populateCard(idea) {
           <input type ="image" id="downvote-button" class="icon-button" src="images/downvote.svg" alt="downvote icon">
         </footer>
         </article>`
-        
 };
 
 function instantiateIdea (newIdea) {
@@ -97,7 +89,7 @@ function clearFields() {
 
 function restoreIdeas() {
   ideaArray = ideaArray.map(function(oldIdea) {
-    var restoredIdea = new Idea(oldIdea.title, oldIdea.body, oldIdea.id, oldIdea.quality, oldIdea.star);
+    var restoredIdea = new Idea(oldIdea.title, oldIdea.body, oldIdea.id, oldIdea.quality, oldIdea.star, oldIdea.starImg);
     populateCard(restoredIdea);
     return restoredIdea;
   });
@@ -132,7 +124,6 @@ function updateIdeaCard(e) {
     targetId.updateIdea(targetId, target, textValue);
   }
 
-
 function searchFilter(e) {
   e.preventDefault();
   removeCardFilter ()
@@ -144,15 +135,41 @@ function searchFilter(e) {
   textSearch.forEach(function(card) {
     populateCard(card);
   })
-
-}
+};
 
 function removeCardFilter () {
   newCard.innerHTML = '';
+};
+
+function updateStar(event) {
+  event.preventDefault();
+  if (event.target.matches('#star-button')){
+  var targetParent = event.target.parentElement.parentElement;
+  var parsedId = parseInt(targetParent.dataset.id)
+  var targetId = ideaArray.find(function(idea) {
+  return idea.id === parsedId;
+})
+  targetId.starToggle();
+  event.target.classList.toggle('.star-active'); 
 }
+};
+
+// function upvoteCard(event) {
+//   event.preventDefault();
+//   if (event.target.matches('#upvote-button')){
+//   var targetParent = event.target.parentElement.parentElement;
+//   var parsedId = parseInt(targetParent.dataset.id)
+//   var targetId = ideaArray.find(function(idea) {
+//   return idea.id === parsedId;
+// })
+//   // targetId.upVote();
+//   // event.target.classList;
+
+// }
+// };
 
 
-
+  
 
 
 
