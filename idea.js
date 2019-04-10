@@ -40,6 +40,11 @@ class Idea {
 
   starToggle(targetId) {
   this.star = !this.star;
-  }
+  this.saveToStorage();
+  };
+
+  upVote() {
+  this.quality++;
+  };
   
 };

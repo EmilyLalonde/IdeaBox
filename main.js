@@ -1,4 +1,4 @@
-//create the global variables
+
 var newTitle = document.querySelector('#title-input');
 var newBody = document.querySelector('#body-input');
 var submitButton = document.querySelector("#submit-input");
@@ -11,9 +11,7 @@ var qualityLevels = ["swill", "plausible", "genius"];
 var searchButton = document.querySelector('#search-button');
 var searchInput = document.querySelector('#search-input');
 
-// var modifiedTitle = document.querySelector('.editable-title');
 
-//add event listeners
 submitButton.addEventListener('click', createIdea);
 submitButton.addEventListener('click', handleSubmitButton);
 window.addEventListener('load', restoreIdeas);
@@ -21,9 +19,8 @@ window.addEventListener('load', handleSubmitButton);
 newTitle.addEventListener('keyup', handleSubmitButton);
 newBody.addEventListener('keyup', handleSubmitButton);
 newCard.addEventListener('click', updateStar); 
-newCard.addEventListener("input", updateIdeaCard)
-
-// newCard.addEventListener('click', removeCard);
+newCard.addEventListener('input', updateIdeaCard)
+newCard.addEventListener('click', changeStar)
 searchButton.addEventListener('click', searchFilter);
 searchInput.addEventListener('keyup', searchFilter);
 
@@ -40,16 +37,14 @@ window.addEventListener('load', greetingMessage);
 newCard.addEventListener('click', greetingMessage);
 
 
+
 function greetingMessage(e){
   var greeting = document.querySelector('.greeting');
   e.preventDefault();
   if (ideaArray.length !==0) {
-  console.log("There are items in the array");
-  console.log(ideaArray.length);
   greeting.setAttribute("hidden", true)
   } else { 
     greeting.removeAttribute("hidden", true)
-    console.log("Array is empty")
   }
  };   
 
@@ -59,7 +54,7 @@ function populateCard(idea) {
   newCard.prepend(cardPlaceholder);
   cardPlaceholder.innerHTML = 
         `<article data-id="${idea.id}" ><header>
-        <input type="image" id="star-button" class="star-button icon-button" src="images/star.svg" alt="star button">
+        <input type="image" id="star-button" class="star-button icon-button ${idea.star}" src="images/star.svg" alt="star button">
           <input type ="image" class="close-the-card icon-button" src ="images/menu-close.svg" alt="x button">
         </header>
           <h2 contentEditable = "true" class="editable-title">${idea.title}</h2>
@@ -74,7 +69,6 @@ function populateCard(idea) {
 
 function instantiateIdea (newIdea) {
   var newIdea = new Idea (newTitle.value, newBody.value, Date.now());
-  console.log(ideaArray)
   ideaArray.push(newIdea);
   newIdea.saveToStorage(ideaArray);
   return newIdea;
@@ -112,7 +106,6 @@ function handleSubmitButton(e){
   }
 };
 
-
 function updateIdeaCard(e) {
     var targetParent = e.target.parentElement;
     var parsedId = JSON.parse(targetParent.dataset.id);
@@ -141,32 +134,39 @@ function removeCardFilter () {
   newCard.innerHTML = '';
 };
 
-function updateStar(event) {
+function updateStar(idea) {
   event.preventDefault();
   if (event.target.matches('#star-button')){
   var targetParent = event.target.parentElement.parentElement;
   var parsedId = parseInt(targetParent.dataset.id)
   var targetId = ideaArray.find(function(idea) {
   return idea.id === parsedId;
-})
+  })
   targetId.starToggle();
-  event.target.classList.toggle('.star-active'); 
-}
+  }
 };
 
-// function upvoteCard(event) {
-//   event.preventDefault();
-//   if (event.target.matches('#upvote-button')){
-//   var targetParent = event.target.parentElement.parentElement;
-//   var parsedId = parseInt(targetParent.dataset.id)
-//   var targetId = ideaArray.find(function(idea) {
-//   return idea.id === parsedId;
-// })
-//   // targetId.upVote();
-//   // event.target.classList;
+function changeStar(event){
 
-// }
-// };
+  if (event.target.src !=='images/star-active.svg'){
+  event.target.src = 'images/star-active.svg'
+  } 
+  
+
+};
+
+function upvoteCard(idea) {
+  event.preventDefault();
+  if (event.target.matches('#upvote-button')){
+  var targetParent = event.target.parentElement.parentElement;
+  var parsedId = parseInt(targetParent.dataset.id)
+  var targetId = ideaArray.find(function(idea) {
+  return idea.id === parsedId;
+})
+  targetId.upVote(); 
+
+}
+};
 
 
   
