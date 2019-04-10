@@ -41,7 +41,24 @@ newCard.addEventListener('click', function(e) {
    removedIdea.deleteFromStorage(targetId);
   }
 });  
+window.addEventListener('load', greetingMessage);
+newCard.addEventListener('click', greetingMessage);
 
+
+function greetingMessage(e){
+var greeting = document.querySelector('.greeting');
+e.preventDefault();
+  // if(ideaArray.length === 0){
+  //   console.log ("The array is empty") 
+  //   messageHolder.innerText = "Please enter an idea...";
+  //   newCard.append(messageHolder);
+
+  if (ideaArray.length !==0) {
+  console.log("There are items in the array");
+  console.log(ideaArray.length);
+  greeting.setAttribute("hidden", true)
+  }
+ };   
 
 
 function populateCard(idea) {
@@ -65,10 +82,7 @@ function populateCard(idea) {
 
 function instantiateIdea (newIdea) {
   var newIdea = new Idea (newTitle.value, newBody.value, Date.now());
-
   console.log(ideaArray)
-
-
   ideaArray.push(newIdea);
   newIdea.saveToStorage(ideaArray);
   return newIdea;
