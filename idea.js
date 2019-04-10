@@ -26,13 +26,17 @@ class Idea {
   }
 
 
-  updateIdea(targetId, newTitle, newBody) {
+  updateIdea(targetId, target, textValue) {
   var parsedItems = JSON.parse(localStorage.getItem('ideaArray'));
   var itemIndex = parsedItems.findIndex(function(idea) {
     return idea.id === targetId;
   });
-  targetId.title = newTitle;
-  targetId.body = newBody;
+  if (target.className.includes('editable-title')){
+  targetId.title = textValue;
+  }
+  if (target.className.includes('editable-body')){
+  targetId.body = textValue;
+  }
   this.saveToStorage();
   }
 
