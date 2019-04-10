@@ -26,7 +26,7 @@ window.addEventListener('load', restoreIdeas);
 window.addEventListener('load', handleSubmitButton);
 newTitle.addEventListener('keyup', handleSubmitButton);
 newBody.addEventListener('keyup', handleSubmitButton);
-newCard.addEventListener("focusout", updateIdeaCard)
+newCard.addEventListener("input", updateIdeaCard)
 
 // newCard.addEventListener('click', removeCard);
 searchButton.addEventListener('click', searchFilter);
@@ -122,22 +122,14 @@ function handleSubmitButton(e){
 
 
 function updateIdeaCard(e) {
-
-  if(e.target.className.includes("editable-title" && "editable-body")) {
-
     var targetParent = e.target.parentElement;
     var parsedId = JSON.parse(targetParent.dataset.id);
+    let textValue = e.target.innerText
+    var target = e.target;
     var targetId = ideaArray.find(function(idea) {
       return idea.id === parsedId;
     })
-        let newTitle = document.querySelector('.editable-title')
-        let newBody = document.querySelector('.editable-body')
-        let titleValue = newTitle.innerText
-        let bodyValue = newBody.innerText
-
-        targetId.updateIdea(targetId, titleValue, bodyValue);
-
-    }
+    targetId.updateIdea(targetId, target, textValue);
   }
 
 
