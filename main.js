@@ -48,6 +48,9 @@ function greetingMessage(e){
   console.log("There are items in the array");
   console.log(ideaArray.length);
   greeting.setAttribute("hidden", true)
+  } else { 
+    greeting.removeAttribute("hidden", true)
+    console.log("Array is empty")
   }
  };   
 
@@ -57,7 +60,7 @@ function populateCard(idea) {
   newCard.prepend(cardPlaceholder);
   cardPlaceholder.innerHTML = 
         `<article data-id="${idea.id}" ><header>
-        <input type="image" id="star-button" class="icon-button" src="images/star.svg" alt="star button">
+        <input type="image" id="star-button" class="star-button icon-button" src="images/star.svg" alt="star button">
           <input type ="image" class="close-the-card icon-button" src ="images/menu-close.svg" alt="x button">
         </header>
           <h2 contentEditable = "true" class="editable-title">${idea.title}</h2>
@@ -68,18 +71,6 @@ function populateCard(idea) {
           <input type ="image" id="downvote-button" class="icon-button" src="images/downvote.svg" alt="downvote icon">
         </footer>
         </article>`
-
-  document.addEventListener('click', function (event) {
-  if (!event.target.matches('#star-button')) return;
-  event.preventDefault();
-  var targetParent = event.target.parentElement;
-  var parsedId = JSON.parse(targetParent.datatset.id)
-  var targetId = ideaArray.find(function(idea) {
-  return idea.id === targetId;
-
-})
- starToggle(idea);
-})
 };
 
 function instantiateIdea (newIdea) {
@@ -99,7 +90,7 @@ function clearFields() {
 
 function restoreIdeas() {
   ideaArray = ideaArray.map(function(oldIdea) {
-    var restoredIdea = new Idea(oldIdea.title, oldIdea.body, oldIdea.id, oldIdea.quality, oldIdea.star);
+    var restoredIdea = new Idea(oldIdea.title, oldIdea.body, oldIdea.id, oldIdea.quality, oldIdea.star, oldIdea.starImg);
     populateCard(restoredIdea);
     return restoredIdea;
   });
@@ -142,7 +133,6 @@ function updateIdeaCard(e) {
     }
   }
 
-
 function searchFilter(e) {
   e.preventDefault();
   removeCardFilter ()
@@ -161,8 +151,24 @@ function removeCardFilter () {
   newCard.innerHTML = '';
 }
 
+newCard.addEventListener('click', updateStar); 
+
+function updateStar(idea) {
+  event.preventDefault();
+  if (event.target.matches('#star-button')){
+  var targetParent = event.target.parentElement.parentElement;
+  var parsedId = parseInt(targetParent.dataset.id)
+  var targetId = ideaArray.find(function(idea) {
+  return idea.id === parsedId;
+
+})
+  targetId.starToggle();
+  console.log(targetId)
+}
+};
 
 
+  
 
 
 

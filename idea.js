@@ -40,7 +40,7 @@ class Idea {
   starToggle(targetId) {
   this.star = !this.star;
   if (this.star == true) {
-    this.starImg = "images/star-active"
+    this.starImg = "images/star-active.svg"
   }else{
     this.starImg = "images/star.svg"
   }
