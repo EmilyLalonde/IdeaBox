@@ -11,7 +11,7 @@ class Idea {
   saveToStorage() { 
   var stringifiedNewIdea = JSON.stringify(ideaArray);
   localStorage.setItem('ideaArray', stringifiedNewIdea);
-  }
+  };
 
   deleteFromStorage(targetId) {
   var parsedItems = JSON.parse(localStorage.getItem('ideaArray'));
@@ -21,7 +21,7 @@ class Idea {
 
   parsedItems.splice(itemIndex, 1);
   localStorage.setItem('ideaArray', JSON.stringify(parsedItems));
-  }
+  };
 
   updateIdea(targetId, target, textValue) {
   var parsedItems = JSON.parse(localStorage.getItem('ideaArray'));
@@ -35,16 +35,24 @@ class Idea {
   targetId.body = textValue;
   }
   this.saveToStorage();
-  }
-
-}
   };
 
   starToggle(targetId) {
   this.star = !this.star;
+  if (this.star === false){
+    event.target.src = 'images/star.svg';
+  } else { 
+    event.target.src = 'images/star-active.svg'
+  }
   this.saveToStorage();
   };
 
-  
+  upVote(targetId) {
+    if (this.quality.length > 3 ){
+    this.quality++
+  }
+}
+
+};
 
 
