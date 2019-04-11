@@ -8,7 +8,7 @@ Our task was to create a single page website, containing input elements that sto
 
 ### Website structure
 
-Here is the link to our website: .......
+Here is the link to our website: https://emilylalonde.github.io/IdeaBox/
 
 Here is the structure of the website we built:
 
