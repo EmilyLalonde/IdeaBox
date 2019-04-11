@@ -19,18 +19,14 @@ newTitle.addEventListener('keyup', handleSubmitButton);
 newBody.addEventListener('keyup', handleSubmitButton);
 newCard.addEventListener('click', updateStar); 
 newCard.addEventListener("input", updateIdeaCard)
-// newCard.addEventListener('input', updateIdeaCard)
 searchButton.addEventListener('click', searchFilter);
 searchInput.addEventListener('keyup', searchFilter);
-
 newCard.addEventListener('click', function(e) {
   if (e.target.className === "close-the-card icon-button") {
     e.target.parentElement.parentElement.remove();
     var removedIdea = new Idea();
-
-   var targetId = parseInt(e.target.parentElement.parentElement.dataset.id);
-   removedIdea.deleteFromStorage(targetId);
-   
+    var targetId = parseInt(e.target.parentElement.parentElement.dataset.id);
+    removedIdea.deleteFromStorage(targetId); 
   }
 });  
 window.addEventListener('load', greetingMessage);
@@ -40,7 +36,6 @@ newCard.addEventListener('click', upvoteCard);
 
 function greetingMessage(e){
   var greeting = document.querySelector('.greeting');
-  // e.preventDefault();
   if (ideaArray.length !==0) {
   greeting.setAttribute("hidden", true)
   } else { 
@@ -79,7 +74,7 @@ function clearFields() {
   var newBody = document.querySelector('#body-input');
   newTitle.value = ""; 
   newBody.value = "";
-} 
+}; 
 
 function restoreIdeas() {
   ideaArray = ideaArray.map(function(oldIdea) {
@@ -109,13 +104,13 @@ function handleSubmitButton(e){
 function updateIdeaCard(e) {
     var targetParent = e.target.parentElement;
     var parsedId = JSON.parse(targetParent.dataset.id);
-    let textValue = e.target.innerText
+    var textValue = e.target.innerText;
     var target = e.target;
     var targetId = ideaArray.find(function(idea) {
       return idea.id === parsedId;
-    })
+    });
     targetId.updateIdea(targetId, target, textValue);
-  }
+  };
 
 function searchFilter(e) {
   e.preventDefault();
@@ -138,11 +133,10 @@ function updateStar(idea) {
   event.preventDefault();
   if (event.target.matches('#star-button')){
   var targetParent = event.target.parentElement.parentElement;
-  var parsedId = parseInt(targetParent.dataset.id)
+  var parsedId = parseInt(targetParent.dataset.id);
   var targetId = ideaArray.find(function(idea) {
   return idea.id === parsedId;
   })
-  
   targetId.starToggle();
  } 
 };
@@ -151,15 +145,11 @@ function upvoteCard(idea) {
   event.preventDefault();
   if (event.target.matches('#upvote-button')){
   var targetParent = event.target.parentElement.parentElement;
-  var parsedId = parseInt(targetParent.dataset.id)
+  var parsedId = parseInt(targetParent.dataset.id);
   var targetId = ideaArray.find(function(idea) {
   return idea.id === parsedId;
-})
-}
-  console.log(qualityLevels)
-  console.log(targetId)
-  // targetId.upVote();
-  
+});
+};  
 };
 
 
