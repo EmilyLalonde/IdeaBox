@@ -3,8 +3,8 @@ var newTitle = document.querySelector('#title-input');
 var newBody = document.querySelector('#body-input');
 var submitButton = document.querySelector("#submit-input");
 var closeTheCard = document.querySelector('.close-the-card');
-var upvoteButton = document.querySelector('#upvote-button');
-var downvoteButton = document.querySelector('#downvote-button');
+var upvoteButton = document.querySelector('.quality-up-img');
+var downvoteButton = document.querySelector('.quality-down-img');
 var newCard = document.querySelector('.idea-field');
 var ideaArray = JSON.parse(localStorage.getItem('ideaArray')) || [];
 var qualityLevels = ["swill", "plausible", "genius"];
@@ -19,6 +19,7 @@ window.addEventListener('load', handleSubmitButton);
 newTitle.addEventListener('keyup', handleSubmitButton);
 newBody.addEventListener('keyup', handleSubmitButton);
 newCard.addEventListener('click', updateStar); 
+newCard.addEventListener("input", updateIdeaCard)
 newCard.addEventListener('input', updateIdeaCard)
 newCard.addEventListener('click', changeStar)
 searchButton.addEventListener('click', searchFilter);
@@ -31,6 +32,7 @@ newCard.addEventListener('click', function(e) {
 
    var targetId = parseInt(e.target.parentElement.parentElement.dataset.id);
    removedIdea.deleteFromStorage(targetId);
+   
   }
 });  
 window.addEventListener('load', greetingMessage);
@@ -60,9 +62,9 @@ function populateCard(idea) {
           <h2 contentEditable = "true" class="editable-title">${idea.title}</h2>
           <p contentEditable = "true" class="editable-body">${idea.body}</p>
         <footer>
-          <input type ="image" id="upvote-button" class="icon-button" src="images/upvote.svg" alt="upvote icon">
+          <img id="upvote-button" class="up-button icon-button" src="images/upvote.svg" alt="upvote icon">
           <span>Quality: ${qualityLevels[idea.quality]}</span>
-          <input type ="image" id="downvote-button" class="icon-button" src="images/downvote.svg" alt="downvote icon">
+          <img id="downvote-button" class="down-button icon-button" src="images/downvote.svg" alt="downvote icon">
         </footer>
         </article>`
 };
@@ -152,7 +154,6 @@ function changeStar(event){
   event.target.src = 'images/star-active.svg'
   } 
   
-
 };
 
 function upvoteCard(idea) {
@@ -167,19 +168,6 @@ function upvoteCard(idea) {
 
 }
 };
-
-
-  
-
-
-
-
-
-
-
-
-
-
 
 
 

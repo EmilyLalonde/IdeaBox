@@ -1,13 +1,13 @@
 class Idea {
 
-  constructor (title, body, id, quality = 0, star = false){
+  constructor (title, body, id, quality = 0, star = false) {
     this.title = title;
     this.body = body;
     this.id = id;
+    this.star = star;
     this.quality = quality;
-    this.star = star; 
   }
-
+  
   saveToStorage() { 
   var stringifiedNewIdea = JSON.stringify(ideaArray);
   localStorage.setItem('ideaArray', stringifiedNewIdea);
@@ -23,7 +23,6 @@ class Idea {
   localStorage.setItem('ideaArray', JSON.stringify(parsedItems));
   }
 
-
   updateIdea(targetId, target, textValue) {
   var parsedItems = JSON.parse(localStorage.getItem('ideaArray'));
   var itemIndex = parsedItems.findIndex(function(idea) {
@@ -36,6 +35,9 @@ class Idea {
   targetId.body = textValue;
   }
   this.saveToStorage();
+  }
+
+}
   };
 
   starToggle(targetId) {
@@ -43,8 +45,6 @@ class Idea {
   this.saveToStorage();
   };
 
-  upVote() {
-  this.quality++;
-  };
   
-};
+
+
