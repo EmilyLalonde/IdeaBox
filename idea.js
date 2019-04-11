@@ -7,14 +7,12 @@ class Idea {
     this.star = star;
     this.quality = quality;
   }
-
-
+  
   saveToStorage() { 
   var stringifiedNewIdea = JSON.stringify(ideaArray);
   localStorage.setItem('ideaArray', stringifiedNewIdea);
   }
 
-  
   deleteFromStorage(targetId) {
   var parsedItems = JSON.parse(localStorage.getItem('ideaArray'));
   var itemIndex = parsedItems.findIndex(function(idea) {
@@ -24,7 +22,6 @@ class Idea {
   parsedItems.splice(itemIndex, 1);
   localStorage.setItem('ideaArray', JSON.stringify(parsedItems));
   }
-
 
   updateIdea(targetId, target, textValue) {
   var parsedItems = JSON.parse(localStorage.getItem('ideaArray'));
@@ -41,12 +38,12 @@ class Idea {
   }
 
 }
+  };
 
-//   updateQuality() {
-
-
-// // add upVoteIdea;
-// // add downVoteIdea;
+  starToggle(targetId) {
+  this.star = !this.star;
+  this.saveToStorage();
+  };
 
   
 
