@@ -11,7 +11,6 @@ var qualityLevels = ["swill", "plausible", "genius"];
 var searchButton = document.querySelector('#search-button');
 var searchInput = document.querySelector('#search-input');
 
-
 submitButton.addEventListener('click', createIdea);
 submitButton.addEventListener('click', handleSubmitButton);
 window.addEventListener('load', restoreIdeas);
@@ -20,8 +19,7 @@ newTitle.addEventListener('keyup', handleSubmitButton);
 newBody.addEventListener('keyup', handleSubmitButton);
 newCard.addEventListener('click', updateStar); 
 newCard.addEventListener("input", updateIdeaCard)
-newCard.addEventListener('input', updateIdeaCard)
-newCard.addEventListener('click', changeStar)
+// newCard.addEventListener('input', updateIdeaCard)
 searchButton.addEventListener('click', searchFilter);
 searchInput.addEventListener('keyup', searchFilter);
 
@@ -36,13 +34,13 @@ newCard.addEventListener('click', function(e) {
   }
 });  
 window.addEventListener('load', greetingMessage);
-newCard.addEventListener('click', greetingMessage);
-
+newCard.addEventListener('mouseover', greetingMessage);
+newCard.addEventListener('click', upvoteCard);
 
 
 function greetingMessage(e){
   var greeting = document.querySelector('.greeting');
-  e.preventDefault();
+  // e.preventDefault();
   if (ideaArray.length !==0) {
   greeting.setAttribute("hidden", true)
   } else { 
@@ -144,16 +142,9 @@ function updateStar(idea) {
   var targetId = ideaArray.find(function(idea) {
   return idea.id === parsedId;
   })
-  targetId.starToggle();
-  }
-};
-
-function changeStar(event){
-
-  if (event.target.src !=='images/star-active.svg'){
-  event.target.src = 'images/star-active.svg'
-  } 
   
+  targetId.starToggle();
+ } 
 };
 
 function upvoteCard(idea) {
@@ -164,9 +155,11 @@ function upvoteCard(idea) {
   var targetId = ideaArray.find(function(idea) {
   return idea.id === parsedId;
 })
-  targetId.upVote(); 
-
 }
+  console.log(qualityLevels)
+  console.log(targetId)
+  // targetId.upVote();
+  
 };
 
 
